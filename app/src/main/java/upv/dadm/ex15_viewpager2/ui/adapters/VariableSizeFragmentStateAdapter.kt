@@ -27,11 +27,9 @@ class VariableSizeFragmentStateAdapter(fragment: Fragment) : FragmentStateAdapte
      * Computes the difference between the old and new list of the Ids of
      * the currently displayed Fragments.
      */
-    private val diff = AsyncListDiffer<Long>(this, object : DiffUtil.ItemCallback<Long>() {
+    private val diff = AsyncListDiffer(this, object : DiffUtil.ItemCallback<Long>() {
         override fun areItemsTheSame(oldItem: Long, newItem: Long): Boolean = oldItem == newItem
-
         override fun areContentsTheSame(oldItem: Long, newItem: Long): Boolean = oldItem == newItem
-
     })
 
     /**
@@ -62,8 +60,6 @@ class VariableSizeFragmentStateAdapter(fragment: Fragment) : FragmentStateAdapte
     /**
      * Provides the new list of Ids for the Fragments to be displayed.
      */
-    fun submitList(newList: List<Long>) {
-        diff.submitList(newList)
-    }
+    fun submitList(newList: List<Long>) = diff.submitList(newList)
 
 }
