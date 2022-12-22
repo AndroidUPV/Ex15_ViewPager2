@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2022
+  ~ David de Andrés and Juan Carlos Ruiz
+  ~ Development of apps for mobile devices
+  ~ Universitat Politècnica de València
+  -->
+<!--Menu to add/remove Fragments from the ViewPager2-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--Adds a Fragment-->
+    <item
+        android:id="@+id/mAddFragment"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/add_fragment"
+        app:showAsAction="ifRoom" />
+
+    <!--Removes a Fragment-->
+    <item
+        android:id="@+id/mRemoveFragment"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="@string/remove_fragment"
+        app:showAsAction="ifRoom" />
+</menu>

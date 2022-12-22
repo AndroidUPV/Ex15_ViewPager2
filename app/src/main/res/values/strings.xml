@@ -1,0 +1,22 @@
+<!--
+  ~ Copyright (c) 2022
+  ~ David de Andrés and Juan Carlos Ruiz
+  ~ Development of apps for mobile devices
+  ~ Universitat Politècnica de València
+  -->
+
+<resources>
+    <string name="app_name">Ex15_ViewPager2</string>
+    <!--Strings identifying each Fragment-->
+    <string name="message">This is the Fragment ID %d</string>
+    <string name="fixed_view_pager">Fixed size ViewPager</string>
+    <string name="variable_view_pager">Variable size ViewPager</string>
+    <!--Strings for Menu-->
+    <string name="add_fragment">Add fragment</string>
+    <string name="remove_fragment">Remove fragment</string>
+    <!--Strings for NavigationBar-->
+    <string name="fixed_size">Fixed size</string>
+    <string name="variable_size">Variable size</string>
+    <!--Strings for TabLayout-->
+    <string name="tab">Fragment #%d</string>
+</resources>

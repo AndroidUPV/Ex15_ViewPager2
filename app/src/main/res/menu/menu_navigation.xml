@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2022
+  ~ David de Andrés and Juan Carlos Ruiz
+  ~ Development of apps for mobile devices
+  ~ Universitat Politècnica de València
+  -->
+
+<!--
+  ~ Menu to navigate between Fragments.
+  ~ Navigation is automatically handled by setting the same Ids
+  ~ as the destinations in the navigation graph.
+  -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fixedSizeViewPagerFragment"
+        android:icon="@drawable/ic_fixed_size"
+        android:title="@string/fixed_size" />
+    <item
+        android:id="@+id/variableSizeViewPagerFragment"
+        android:icon="@drawable/ic_variable_size"
+        android:title="@string/variable_size" />
+</menu>
