@@ -14,6 +14,9 @@ package upv.dadm.ex15_viewpager2.ui.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 /**
  * Holds the list of fragments Id.
@@ -21,11 +24,10 @@ import androidx.lifecycle.ViewModel
 class MessagesViewModel : ViewModel() {
 
     // Backing property for the list of Id (empty by default)
-    private val _messagesList = MutableLiveData(listOf<Long>())
+    private val _messagesList = MutableStateFlow(listOf<Long>())
 
     // List of Ids
-    val messagesList: LiveData<List<Long>>
-        get() = _messagesList
+    val messagesList = _messagesList.asStateFlow()
 
     /**
      * Adds a new Id to the list.
@@ -33,12 +35,15 @@ class MessagesViewModel : ViewModel() {
      */
     fun addMessage() {
         // If the list is empty then add the first Id (0)
-        if (_messagesList.value?.isEmpty() != false) {
-            _messagesList.value = listOf(0)
+        if (_messagesList.value.isEmpty()) {
+            _messagesList.update {
+                listOf(0)
+            }
         } else {
             // Add a new Id by increasing the last Id in one
-            _messagesList.value =
-                _messagesList.value?.plus(_messagesList.value!![_messagesList.value!!.lastIndex] + 1)
+            _messagesList.update { list ->
+                list.plus(list[list.lastIndex] + 1)
+            }
         }
     }
 
@@ -46,7 +51,9 @@ class MessagesViewModel : ViewModel() {
      * Removes the Id located at the given position.
      */
     fun removeMessage(position: Int) {
-        _messagesList.value = _messagesList.value!!.minus(_messagesList.value!![position])
+        _messagesList.update { list ->
+            list.minus(list[position])
+        }
     }
 
 }

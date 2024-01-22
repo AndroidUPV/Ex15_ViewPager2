@@ -19,8 +19,12 @@ import android.view.View
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.launch
 import upv.dadm.ex15_viewpager2.R
 import upv.dadm.ex15_viewpager2.databinding.FragmentViewPagerBinding
 import upv.dadm.ex15_viewpager2.ui.adapters.VariableSizeFragmentStateAdapter
@@ -56,15 +60,19 @@ class VariableSizeViewPagerFragment : Fragment(R.layout.fragment_view_pager), Me
         binding.tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
         // Link the TabLayout to the ViewPager2
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            tab.text = getString(R.string.tab, viewModel.messagesList.value?.get(position))
+            tab.text = getString(R.string.tab, viewModel.messagesList.value.get(position))
         }.attach()
 
         // Add this Fragment as MenuProvider to its Activity
         requireActivity().addMenuProvider(this@VariableSizeViewPagerFragment, viewLifecycleOwner)
 
-        // Update the Fragments displayed by the ViewPager2 when the list of Ids changes
-        viewModel.messagesList.observe(viewLifecycleOwner) { list ->
-            adapter.submitList(list)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                // Update the Fragments displayed by the ViewPager2 when the list of Ids changes
+                viewModel.messagesList.collect { list ->
+                    adapter.submitList(list)
+                }
+            }
         }
     }
 
